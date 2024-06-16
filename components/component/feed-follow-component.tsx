@@ -22,8 +22,6 @@ const followFeed = async (feed: any) => {
 };
 
 export default function FeedFollowComponent() {
-
-
     const [feedId, setFeedId] = useState('');
     const queryClient = useQueryClient();
     const router = useRouter();
