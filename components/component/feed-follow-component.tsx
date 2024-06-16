@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -22,9 +22,17 @@ const followFeed = async (feed: any) => {
 };
 
 export default function FeedFollowComponent() {
+
+
     const [feedId, setFeedId] = useState('');
     const queryClient = useQueryClient();
     const router = useRouter();
+    useEffect(() => {
+        const token = Cookies.get('jwt');
+        if (!token) {
+            router.push('/register');
+        }
+    }, [router]);
 
     const mutation = useMutation({
         mutationFn: followFeed,
@@ -36,6 +44,14 @@ export default function FeedFollowComponent() {
             alert('Already following feed or error following feed');
         },
     });
+
+
+    useEffect(() => {
+        const token = Cookies.get('jwt');
+        if (!token) {
+            router.push('/register');
+        }
+    }, [router]);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();

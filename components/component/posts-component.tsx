@@ -19,14 +19,24 @@ To read more about using these font, please visit the Next.js documentation:
 **/
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from "next/link";
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import { Button } from "@/components/ui/button";
+import { useRouter } from 'next/router';
 
 const fetchPosts = async () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get('jwt');
+    if (!token) {
+      router.push('/register');
+    }
+  }, [router]);
+
   const token = Cookies.get('jwt');
   const response = await axios.get(`https://blog-aggregator-wrfbmzdfdq-uc.a.run.app/v1/posts`, {
     headers: {

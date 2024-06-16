@@ -10,11 +10,22 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import axios from "axios"
+import { useRouter } from "next/router"
+import Cookies from 'js-cookie';
 
 export default function Component() {
   const [user, setUser] = useState<any>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get('jwt');
+    if (!token) {
+      router.push('/register');
+    }
+  }, [router]);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {

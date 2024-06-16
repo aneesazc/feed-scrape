@@ -4,8 +4,19 @@ import axios from 'axios';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 import { Button } from "@/components/ui/button";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const fetchFeedFollows = async () => {
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = Cookies.get('jwt');
+        if (!token) {
+            router.push('/register');
+        }
+    }, [router]);
+
     const token = Cookies.get('jwt');
     const response = await axios.get(`https://blog-aggregator-wrfbmzdfdq-uc.a.run.app/v1/feed_follows`, {
         headers: {
