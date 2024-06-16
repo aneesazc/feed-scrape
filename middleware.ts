@@ -1,16 +1,19 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone();
-  const token = req.cookies.get("jwt");
+export function middleware(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  const token = request.cookies.get("jwt")?.value;
 
   // Define public paths
   const publicPaths = ["/", "/register", "/feeds"];
 
-  if (!token && !publicPaths.includes(url.pathname)) {
-    url.pathname = "/register";
-    return NextResponse.redirect(url);
+  if (token && publicPaths.includes(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (!token && !publicPaths.includes(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/register", request.url));
   }
 
   return NextResponse.next();

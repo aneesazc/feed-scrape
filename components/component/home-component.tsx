@@ -41,7 +41,7 @@ export function HomeComponent() {
                     Get Started
                   </Link>
                   <Link
-                    className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 border-[#00b894] bg-transparent px-6 text-sm font-medium text-[#00b894] shadow-sm transition-colors hover:bg-[#00b894]/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00b894] disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-transparent px-6 text-sm font-medium text-[#00b894] shadow-sm transition-colors hover:bg-[#00b894]/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00b894] disabled:pointer-events-none disabled:opacity-50"
                     href="/register"
                   >
                     Register
