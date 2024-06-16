@@ -28,15 +28,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/router';
 
 const fetchPosts = async () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = Cookies.get('jwt');
-    if (!token) {
-      router.push('/register');
-    }
-  }, [router]);
-
   const token = Cookies.get('jwt');
   const response = await axios.get(`https://blog-aggregator-wrfbmzdfdq-uc.a.run.app/v1/posts`, {
     headers: {
@@ -47,6 +38,15 @@ const fetchPosts = async () => {
 };
 
 export function PostsComponent() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get('jwt');
+    if (!token) {
+      router.push('/register');
+    }
+  }, [router]);
+
   const { data: posts, error, isLoading } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts
