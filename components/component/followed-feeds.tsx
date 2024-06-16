@@ -8,15 +8,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const fetchFeedFollows = async () => {
-    const router = useRouter();
-
-    useEffect(() => {
-        const token = Cookies.get('jwt');
-        if (!token) {
-            router.push('/register');
-        }
-    }, [router]);
-
     const token = Cookies.get('jwt');
     const response = await axios.get(`https://blog-aggregator-wrfbmzdfdq-uc.a.run.app/v1/feed_follows`, {
         headers: {
@@ -47,6 +38,15 @@ const deleteFeedFollow = async (feedFollowID: any) => {
 };
 
 export default function FollowedFeedsComponent() {
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = Cookies.get('jwt');
+        if (!token) {
+            router.push('/register');
+        }
+    }, [router]);
+
     const queryClient = useQueryClient();
 
     const { data: feedFollows, error: feedFollowsError, isLoading: feedFollowsLoading } = useQuery({
