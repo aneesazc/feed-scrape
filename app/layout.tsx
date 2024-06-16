@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import LogoutButton from "@/components/component/logout-component";
+export const dynamic = 'force-dynamic';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +21,149 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Providers>
+          <header className="bg-gray-900 text-white py-6 px-4 md:px-6">
+            <div className="container mx-auto flex items-center justify-between">
+              <Link className="flex items-center gap-2 text-lg font-bold" href="/">
+                <MountainIcon className="h-6 w-6" />
+                <span>FeedScrape</span>
+              </Link>
+              <nav className="hidden md:flex items-center gap-6">
+
+                <Link className="hover:underline" href="/register">
+                  Register
+                </Link>
+                <Link className="hover:underline" href="/profile">
+                  Profile
+                </Link>
+                <Link className="hover:underline" href="/feeds">
+                  All Feeds
+                </Link>
+                <Link className="hover:underline" href="/feed-follow">
+                  Follow Feed
+                </Link>
+                <Link className="hover:underline" href="/followed-feeds">
+                  Followed Feeds
+                </Link>
+                <Link className="hover:underline" href="/posts">
+                  Posts
+                </Link>
+                <LogoutButton />
+              </nav>
+              <Button className="md:hidden" size="sm" variant="outline">
+                <MenuIcon className="h-5 w-5" />
+                <span className="sr-only">Toggle navigation</span>
+              </Button>
+            </div>
+          </header>{children}
+
+        </Providers>
+      </body>
     </html>
   );
+}
+
+
+function ActivityIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+    </svg>
+  )
+}
+
+
+function ChevronRightIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  )
+}
+
+
+function FilePenIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 22h6a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v10" />
+      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      <path d="M10.4 12.6a2 2 0 1 1 3 3L8 21l-4 1 1-4Z" />
+    </svg>
+  )
+}
+
+
+function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  )
+}
+
+
+function MountainIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+    </svg>
+  )
 }
