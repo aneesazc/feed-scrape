@@ -17,14 +17,6 @@ export default function Component() {
   const [user, setUser] = useState<any>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = Cookies.get('jwt');
-    if (!token) {
-      router.push('/register');
-    }
-  }, [router]);
 
   useEffect(() => {
     const fetchUserData = async () => {

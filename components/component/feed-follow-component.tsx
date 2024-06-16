@@ -22,8 +22,6 @@ const followFeed = async (feed: any) => {
 };
 
 export default function FeedFollowComponent() {
-
-
     const [feedId, setFeedId] = useState('');
     const queryClient = useQueryClient();
     const router = useRouter();
@@ -44,14 +42,6 @@ export default function FeedFollowComponent() {
             alert('Already following feed or error following feed');
         },
     });
-
-
-    useEffect(() => {
-        const token = Cookies.get('jwt');
-        if (!token) {
-            router.push('/register');
-        }
-    }, [router]);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();

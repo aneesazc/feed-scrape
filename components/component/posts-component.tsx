@@ -38,14 +38,6 @@ const fetchPosts = async () => {
 };
 
 export function PostsComponent() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = Cookies.get('jwt');
-    if (!token) {
-      router.push('/register');
-    }
-  }, [router]);
 
   const { data: posts, error, isLoading } = useQuery({
     queryKey: ['posts'],
