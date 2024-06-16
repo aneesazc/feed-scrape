@@ -38,6 +38,14 @@ const deleteFeedFollow = async (feedFollowID: any) => {
 };
 
 export default function FollowedFeedsComponent() {
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = Cookies.get('jwt');
+        if (!token) {
+            router.push('/register');
+        }
+    }, [router]);
 
     const queryClient = useQueryClient();
 
